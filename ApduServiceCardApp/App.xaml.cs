@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Storage;
 
 namespace ApduServiceCardApp
 {
@@ -17,7 +18,8 @@ namespace ApduServiceCardApp
             MainPage = new MainPage();
         }
 
-        public static async Task DisplayAlertAsync(string msg) => 
-            await Device.InvokeOnMainThreadAsync(async () => await Current.MainPage.DisplayAlert("message from service", msg, "ok"));
+        public static async Task DisplayAlertAsync(string msg) =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+                await Current.MainPage.DisplayAlert("message from service", msg, "ok"));
     }
 }

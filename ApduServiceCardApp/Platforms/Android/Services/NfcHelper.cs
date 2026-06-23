@@ -1,8 +1,8 @@
-﻿using Android.App;
 using Android.Content;
 using Android.Nfc;
 using ApduServiceCardApp.Services;
-using Xamarin.Forms;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
 
 [assembly: Dependency(typeof(ApduServiceCardApp.Droid.Services.NfcHelper))]
 namespace ApduServiceCardApp.Droid.Services
@@ -11,7 +11,7 @@ namespace ApduServiceCardApp.Droid.Services
     {
         public NfcAdapterStatus GetNfcAdapterStatus()
         {
-            var adapter = NfcAdapter.GetDefaultAdapter(Forms.Context as Activity);
+            var adapter = NfcAdapter.GetDefaultAdapter(Platform.CurrentActivity);
             return adapter == null ? NfcAdapterStatus.NoAdapter : adapter.IsEnabled ? NfcAdapterStatus.Enabled : NfcAdapterStatus.Disabled;
         }
 
