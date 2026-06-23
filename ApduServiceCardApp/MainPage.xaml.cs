@@ -1,6 +1,6 @@
-﻿using ApduServiceCardApp.Services;
 using System.Threading.Tasks;
-using Xamarin.Forms;
+using ApduServiceCardApp.Services;
+using Microsoft.Maui.Controls;
 
 namespace ApduServiceCardApp
 {

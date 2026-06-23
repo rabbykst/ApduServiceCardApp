@@ -1,11 +1,12 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content;
 using Android.Nfc.CardEmulators;
 using Android.OS;
 using System;
 using System.Linq;
 using System.Text;
-using Xamarin.Essentials;
+using ApduServiceCardApp;
+using Microsoft.Maui.Storage;
 
 // HCE
 // http://www.androiddocs.com/guide/topics/connectivity/nfc/hce.html
