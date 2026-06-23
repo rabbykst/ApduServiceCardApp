@@ -11,19 +11,21 @@ namespace ApduServiceCardApp
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
     public class MainActivity : MauiAppCompatActivity
     {
+        private MessageReceiver _receiver;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            var receiver = new MessageReceiver();
+            _receiver = new MessageReceiver();
             var filter = new IntentFilter("MSG_NAME");
             if (OperatingSystem.IsAndroidVersionAtLeast(33))
             {
-                RegisterReceiver(receiver, filter, ReceiverFlags.NotExported);
+                RegisterReceiver(_receiver, filter, ReceiverFlags.NotExported);
             }
             else
             {
-                RegisterReceiver(receiver, filter);
+                RegisterReceiver(_receiver, filter);
             }
 
             if (Intent?.Extras != null)
@@ -31,6 +33,17 @@ namespace ApduServiceCardApp
                 var message = Intent.Extras.GetString("MSG_DATA");
                 await App.DisplayAlertAsync(message);
             }
+        }
+
+        protected override void OnDestroy()
+        {
+            if (_receiver != null)
+            {
+                UnregisterReceiver(_receiver);
+                _receiver = null;
+            }
+
+            base.OnDestroy();
         }
     }
 }
