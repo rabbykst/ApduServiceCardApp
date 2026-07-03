@@ -43,6 +43,7 @@ namespace ApduServiceCardApp.Droid.Services
 
                 //StartActivity(typeof(MainActivity));
                 var intent = new Intent(this, typeof(MainActivity));
+                intent.AddFlags(ActivityFlags.NewTask);
                 intent.PutExtra("MSG_DATA", $"data for application - {hexString}");
                 StartActivity(intent);
 
